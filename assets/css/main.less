@@ -1,0 +1,166 @@
+@import "elements.less";
+@import "font-awesome.less";
+
+body {
+	background-color: #d0d0d0;
+}
+
+header {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: #251149;
+
+	h1.title {
+		font-size: 18px;
+		margin: 5px 0 6px;
+
+		a {
+			color: #fff;
+			text-decoration: none;
+		}
+	}
+}
+
+#game {
+	position: absolute;
+	background-color: #d0d0d0;
+	margin: 0 auto;
+	width: 480px;
+	height: 720px;
+}
+
+.main-content {
+	padding-top: 10px;
+	padding-bottom: 10px;
+
+	h4 {
+		margin-top: 0;
+	}
+}
+
+#panel-user {
+	h3 {
+		margin-top: 0;
+	}
+
+	.player-data {
+		.player-identity {
+			position: relative;
+			min-height: 48px;
+			margin-bottom: 10px;
+			padding-left: 60px;
+
+			.player-avatar {
+				position: absolute;
+				left: 0;
+				width: 48px;
+				height: 48px;
+				overflow: hidden;
+				background-color: #333;
+				.rounded(100%);
+			}
+
+			.player-name {
+				
+			}
+		}
+
+		.player-points {
+			h3 {
+				text-align: right;
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+
+#panel-list-room {
+	ul {
+		margin: 0;
+		padding: 0;
+
+		li {
+			list-style: none;
+			position: relative;
+			border-bottom: solid 1px #d0d0d0;
+		}
+	}
+
+	.room-info {
+		padding-right: 80px;
+		padding-bottom: 10px;
+	}
+
+	button {
+		&#join-room {
+			position: absolute;
+			right: 0;
+			top: 0;
+			height: 40px;
+			width: 80px;
+		}
+	}
+}
+
+#panel-room {
+	#players {
+		ul {
+			margin: 0;
+			padding: 0;
+
+			li {
+				list-style: none;
+				display: inline-block;
+			}
+		}
+
+		.player-data {
+			.player-avatar {
+				width: 30px;
+				height: 30px;
+				background-color: #333;
+				.rounded(100%);
+			}
+
+			&.nodata {
+				.player-avatar {
+					background-color: #bebebe;
+				}
+			}
+		}
+	}
+
+	#plane-selector {
+		.scroll {
+			position: relative;
+			overflow-x: scroll;
+			white-space: nowrap;
+			background-color: #d0d0d0;
+			padding: 3px;
+			margin-bottom: 10px;
+			height: 100px;
+			width: 100%;
+
+			ul {
+				margin: 0;
+				padding: 0;
+
+				li {
+					list-style: none;
+					display: inline-block;
+				}
+			}
+		}
+
+		button {
+			&.button-plane {
+				width: 100px;
+				height: 94px;
+			}
+		}
+	}
+
+	.room-status {
+		font-size: 12px;
+	}
+}

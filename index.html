@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="eng">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+
+		<title>Jet Race The Game</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+	</head>
+	<body>
+		<div class="site-wrap">
+			<header>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-sm-12 clearfix">
+							<h1 class="title pull-left">
+								<a href="#">Jet Race <small>The Game</small></a>
+							</h1>
+						</div>
+					</div>
+				</div>
+			</header>
+			<div class="main-content container-fluid app">
+				<div class="row clearfix">
+					<div class="col-sm-12">
+
+						<div id="panel-login" class="panel">
+							<div class="panel-body">
+								<h4>Sign In</h4>
+								<button class="button styled-button green" id="quickstart-sign-in">
+									<i class="fa fa-google"></i> Masuk dengan Akun Google
+								</button>
+							</div>
+						</div>
+
+						<div id="panel-user" class="panel">
+							<div class="panel-body clearfix">
+								<button class="button styled-button green pull-right" id="quickstart-sign-in">
+									<i class="fa fa-power-off"></i>
+								</button>
+								<div class="player-data">
+									<div class="player-identity">
+										<div class="player-avatar">
+											<img src="" />
+										</div>
+										<h4 class="player-name">Mochamad Arif Septian Putera</h4>
+									</div>
+									<div class="player-points">
+										<h3>0 <small>win</small> / 0 <small>lose</small></h3>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div id="panel-list-room" class="panel">
+							<div class="panel-body">
+								<h4>Game Room</h4>
+								<div>
+									<ul>
+										<li>
+											<div class="room-info">
+												<h3>#01</h3>
+												Players <span>0</span>
+											</div>
+											<button class="button styled-button green" id="join-room">
+												Join
+											</button>
+										</li>
+										<li>
+											<div class="room-info">
+												<h3>#02</h3>
+												Players <span>0</span>
+											</div>
+											<button class="button styled-button green" id="join-room">
+												Join
+											</button>
+										</li>
+										<li>
+											<div class="room-info">
+												<h3>#03</h3>
+												Players <span>0</span>
+											</div>
+											<button class="button styled-button green" id="join-room">
+												Join
+											</button>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div id="panel-room" class="panel">
+							<div class="panel-body">
+								<h4>Room #01</h4>
+								<div id="players">
+									<ul>
+										<li>
+											<div class="player-data" title="Mochamad Arif Septian Putera">
+												<div class="player-avatar">
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="player-data nodata" title="Waiting for other player ...">
+												<div class="player-avatar">
+												</div>
+											</div>
+										</li>
+									</ul>
+								</div>
+								<div id="plane-selector">
+									<h5>Plane Selection</h5>
+									<div class="scroll">
+										<ul>
+											<li>
+												<button class="button-plane">
+													Plane 1
+												</button>
+											</li>
+											<li>
+												<button class="button-plane">
+													Plane 2
+												</button>
+											</li>
+											<li>
+												<button class="button-plane">
+													Plane 3
+												</button>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div>
+									<div class="room-status">Waiting for other player ...</div>
+									<button class="button styled-button green" id="start-game">
+										Start Game
+									</button>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="assets/js/vendor/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="assets/js/vendor/bootstrap.min.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.1.0/firebase.js"></script>
+		<script>
+			// Initialize Firebase
+			var config = {
+				apiKey: "AIzaSyA6LBwix2AnofZEye2hyxTp22CePQZsTCs",
+				authDomain: "jet-race-the-game.firebaseapp.com",
+				databaseURL: "https://jet-race-the-game.firebaseio.com",
+				projectId: "jet-race-the-game",
+				storageBucket: "jet-race-the-game.appspot.com",
+				messagingSenderId: "790290538592"
+			};
+			firebase.initializeApp(config);
+		</script>
+	</body>
+</html>
