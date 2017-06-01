@@ -23,7 +23,7 @@
 					</div>
 				</div>
 			</header>
-			<div class="main-content container-fluid app">
+			<div class="main-content container-fluid">
 				<div class="row clearfix">
 					<div class="col-sm-12">
 
@@ -36,58 +36,32 @@
 							</div>
 						</div>
 
-						<div id="panel-user" class="panel">
-							<div class="panel-body clearfix">
-								<button class="button styled-button green pull-right" id="quickstart-sign-in">
-									<i class="fa fa-power-off"></i>
-								</button>
-								<div class="player-data">
-									<div class="player-identity">
-										<div class="player-avatar">
-											<img src="" />
+						<div id="signed-view">
+							<div id="panel-user" class="panel">
+								<div class="panel-body clearfix">
+									<button class="button styled-button green pull-right" id="quickstart-sign-out">
+										<i class="fa fa-power-off"></i>
+									</button>
+									<div class="player-data">
+										<div class="player-identity">
+											<div class="player-avatar">
+												<img src="" />
+											</div>
+											<h4 class="player-name">Mochamad Arif Septian Putera</h4>
 										</div>
-										<h4 class="player-name">Mochamad Arif Septian Putera</h4>
-									</div>
-									<div class="player-points">
-										<h3>0 <small>win</small> / 0 <small>lose</small></h3>
+										<div class="player-points">
+											<h3>0 <small>win</small> / 0 <small>lose</small></h3>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
 
-						<div id="panel-list-room" class="panel">
-							<div class="panel-body">
-								<h4>Game Room</h4>
-								<div>
-									<ul>
-										<li>
-											<div class="room-info">
-												<h3>#01</h3>
-												Players <span>0</span>
-											</div>
-											<button class="button styled-button green" id="join-room">
-												Join
-											</button>
-										</li>
-										<li>
-											<div class="room-info">
-												<h3>#02</h3>
-												Players <span>0</span>
-											</div>
-											<button class="button styled-button green" id="join-room">
-												Join
-											</button>
-										</li>
-										<li>
-											<div class="room-info">
-												<h3>#03</h3>
-												Players <span>0</span>
-											</div>
-											<button class="button styled-button green" id="join-room">
-												Join
-											</button>
-										</li>
-									</ul>
+							<div id="panel-list-room" class="panel">
+								<div class="panel-body">
+									<h4>Game Room</h4>
+									<div class="room-list-container">
+										<ul id="room-list"></ul>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -147,8 +121,12 @@
 			</div>
 		</div>
 
-		<script type="text/javascript" src="assets/js/vendor/jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="assets/js/vendor/bootstrap.min.js"></script>
+		<div class="loading" style="display: none;">
+			<div class="loading-page">
+				<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading...
+			</div>
+		</div>
+
 		<script src="https://www.gstatic.com/firebasejs/4.1.0/firebase.js"></script>
 		<script>
 			// Initialize Firebase
@@ -162,5 +140,10 @@
 			};
 			firebase.initializeApp(config);
 		</script>
+
+		<script type="text/javascript" src="assets/js/vendor/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="assets/js/vendor/bootstrap.min.js"></script>
+		<script type="text/javascript" src="assets/js/utility.js"></script>
+		<script type="text/javascript" src="assets/js/main.js"></script>
 	</body>
 </html>
