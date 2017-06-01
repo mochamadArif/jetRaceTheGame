@@ -84,7 +84,7 @@ $(document).ready(function(){
 
 		var content = null;
 
-		if(players.length >= 2) {
+		if(players.length >= datum_room.maxPlayers) {
 			content = {
 				signedPlayer: players,
 				isFull: true
@@ -107,10 +107,6 @@ $(document).ready(function(){
 
 		$('#back-to-menu').on('click', function() {
 			cancelRace(id, uid);
-		});
-
-		$('#ready-game').on('click', function() {
-			// TODO : SET READY
 		});
 	}
 
@@ -145,12 +141,16 @@ $(document).ready(function(){
 
 	function setRace(idRoom, uid) {
 		var room = getRoomById(idRoom);
+		var roomData = null;
 		var playerKey = null;
 
 		if(room.signedPlayer) {
 			_.forEach(room.signedPlayer, function(value, key){
 				if(value.id == uid) {
+					roomData = value;
 					playerKey = key + 1;
+
+					checkOtherPlayer(idRoom);
 				}
 			});
 		}
@@ -161,6 +161,42 @@ $(document).ready(function(){
 				
 				$(this).addClass('selected');
 			});
+		});
+
+		$('#ready-game').on('click', function() {
+			var selectedPlaneId = $('.button-plane.selected').data('id');
+			setReady(roomData, playerKey, selectedPlaneId)
+		});
+	}
+
+	function checkOtherPlayer(id, room) {
+		var url = firebase.database().ref('game_room/'+id);
+			result = null;
+
+		url.on('value', function(snapshot) {
+			result = snapshot.val();
+
+			if(result.signedPlayer.length < 2) {
+				url = firebase.database().ref('game_room/'+id);
+			}
+
+			showSelector(result);
+		}, function(error) {
+			console.log(error)
+		});
+	}
+
+	function setReady(data, playerKey, planeId) {
+		$('#ready-game').hide();
+		$('.room-status').show();
+	}
+
+	function showSelector(roomData) {
+		_.forEach(roomData.signedPlayer, function(value, key){
+			var i = key+1;
+
+			$('#selector-noplayer-'+i).hide();
+			$('#selector-'+i).show();
 		});
 	}
 });

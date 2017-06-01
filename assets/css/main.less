@@ -382,11 +382,40 @@ body {
 	}
 
 	.selection-block {
+		&#selector-noplayer-1 {
+			// display: none;
+		}
+
+		&#selector-noplayer-2 {
+			// display: none;
+		}
+
+		&#selector-1 {
+			display: none;
+		}
+
+		&#selector-2 {
+			display: none;
+		}
+
 		.player-name {
 			text-align: center;
 			display: block;
 			width: 100%;
 			font-family: @FONT_LEMON;
+			letter-spacing: 1px;
+			color: #fff;
+		}
+
+		&.no-player {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 137px;
+			width: 100%;
+			text-align: center;
+			font-family: @FONT_LEMON;
+			font-size: 14px;
 			letter-spacing: 1px;
 			color: #fff;
 		}
