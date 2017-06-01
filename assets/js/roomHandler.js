@@ -69,14 +69,10 @@ $(document).ready(function(){
 		var datum_room = getRoomById(id);
 		var players = datum_room.signedPlayer ? (datum_room.signedPlayer.length ? datum_room.signedPlayer : []) : [];
 
-		_.indexOf(datum_room, uid) > -1 ? null : players.push(uid);
-
-		var content = {
-			signedPlayer: players
+		if(_.indexOf(datum_room, uid) == -1) {
+			players.push(uid);
+			firebase.database().ref('game_room/' + id).update({ signedPlayer: players });
 		}
-
-		var safeData = firebase.database().ref('game_room/' + id).update(content);
-		console.log(safeData);
 
 		$('#back-to-menu').on('click', function() {
 			cancelRace(id);
