@@ -137,7 +137,7 @@ body {
 	display: none;
 
 	.logo-main {
-		background-color: red;
+		// background-color: red;
 		width: 200px;
 		height: 130px;
 		margin: 0 auto;
@@ -145,6 +145,10 @@ body {
 		margin-bottom: 20px;
 		left: 0;
 		right: 0;
+
+		img {
+			width: 100%;
+		}
 	}
 }
 
@@ -451,6 +455,13 @@ body {
 			&.button-plane {
 				width: 85px;
 				height: 85px;
+				background-color: transparent;
+				border: 0;
+				outline: none;
+
+				img {
+					width: 100%;
+				}
 			}
 		}
 	}
@@ -467,8 +478,10 @@ body {
 
 		button {
 			&#ready-game {
+				font-family: @FONT_LEMON;
+				letter-spacing: 1px;
 				background-color: transparent;
-				padding: 10px 15px;
+				padding: 10px 40px;
 				border: solid 2px #20C7D9;
 				color: #20C7D9;
 				font-size: 12px;
