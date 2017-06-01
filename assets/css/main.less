@@ -458,9 +458,18 @@ body {
 				background-color: transparent;
 				border: 0;
 				outline: none;
+				.transition();
 
 				img {
+					.transition();
 					width: 100%;
+					.scale(0.8);
+				}
+
+				&.selected {
+					img {
+						.scale(1);
+					}
 				}
 			}
 		}

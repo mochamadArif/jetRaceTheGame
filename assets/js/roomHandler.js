@@ -95,7 +95,9 @@ $(document).ready(function(){
 
 		firebase.database().ref('game_room/' + id).update(content).then(function(){
 			$('#signed-view').attr('data-inroom', true);
-			$('#panel-room').fadeIn();
+			$('#panel-room').fadeIn(function(){
+				setRace(id, uid);
+			});
 
 			hideLoadingPage();
 		}).catch(function(error) {
@@ -139,5 +141,26 @@ $(document).ready(function(){
 				hideLoadingPage();
 			});
 		}
+	}
+
+	function setRace(idRoom, uid) {
+		var room = getRoomById(idRoom);
+		var playerKey = null;
+
+		if(room.signedPlayer) {
+			_.forEach(room.signedPlayer, function(value, key){
+				if(value.id == uid) {
+					playerKey = key + 1;
+				}
+			});
+		}
+
+		$('.button-plane.player-'+playerKey).each(function(){
+			$(this).on('click', function(){
+				$('.button-plane.player-'+playerKey).removeClass('selected');
+				
+				$(this).addClass('selected');
+			});
+		});
 	}
 });
