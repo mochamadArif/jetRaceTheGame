@@ -89,6 +89,8 @@ function signOut() {
 
 function initData(user) {
 	if(user) {
+		saveUser(user);
+
 		$('#player-name').text(user.displayName);
 		$('#signed-view').attr('data-id', user.uid);
 	}
@@ -103,6 +105,24 @@ function setUnsign() {
 	$('.main-content').removeClass('app');
 	$('#panel-login').fadeIn();
 	$('#signed-view').hide();
+}
+
+function saveUser(dat) {
+	var url = firebase.database().ref('players/'+dat.uid);
+
+	url.on('value', function(snapshot) {
+		var result = snapshot.val();
+
+		if(!result) {
+			var datUser = {
+				name: dat.displayName,
+				attemps: 0,
+				wins: 0
+			}
+
+			firebase.database().ref('players/' + dat.uid).set(datUser);
+		}
+	});
 }
 
 /* --------------------------------------------------------------------------------- */

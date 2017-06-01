@@ -72,30 +72,14 @@ $(document).ready(function(){
 		showLoadingPage();
 
 		var datum_room = getRoomById(id);
-		var players = datum_room.signedPlayer ? datum_room.signedPlayer : [];
 
-		/* TODO : CHECK IF PLAYER REFRESH THE PAGE BUH HAS ALREADY SIGNED TO THE ROOM */
-
-		players.push({
-			id: uid,
+		firebase.database().ref('game_room/' + id + '/signedPlayer/' + uid).update({
 			selectedPlane: 0,
 			isReady: false
-		});
-
-		var content = null;
-
-		if(players.length >= datum_room.maxPlayers) {
-			content = {
-				signedPlayer: players,
-				isFull: true
-			}
-		}else {
-			content = { signedPlayer: players }
-		}
-
-		firebase.database().ref('game_room/' + id).update(content).then(function(){
+		}).then(function(){
 			$('#signed-view').attr('data-inroom', true);
 			$('#panel-room').fadeIn(function(){
+				/* SET ROOM DATA */
 				setRace(id, uid);
 			});
 
@@ -145,13 +129,19 @@ $(document).ready(function(){
 		var playerKey = null;
 
 		if(room.signedPlayer) {
+			var i = 1;
+
 			_.forEach(room.signedPlayer, function(value, key){
-				if(value.id == uid) {
+				if(key == uid) {
 					roomData = value;
-					playerKey = key + 1;
+					playerKey = i;
+
+					$('#room-name').text('Hangar '+room.name);
 
 					checkOtherPlayer(idRoom);
 				}
+
+				i++;
 			});
 		}
 
@@ -160,6 +150,14 @@ $(document).ready(function(){
 				$('.button-plane.player-'+playerKey).removeClass('selected');
 				
 				$(this).addClass('selected');
+
+				var planeID = $(this).data('id');
+
+				firebase.database().ref('game_room/'+idRoom+'/signedPlayer/'+uid).update({ selectedPlane: planeID }).then(function(){
+					checkOtherPlayer(idRoom);
+				}).catch(function(error){
+					console("Data could not be saved." + error);
+				});
 			});
 		});
 
@@ -169,14 +167,14 @@ $(document).ready(function(){
 		});
 	}
 
-	function checkOtherPlayer(id, room) {
+	function checkOtherPlayer(id) {
 		var url = firebase.database().ref('game_room/'+id);
 			result = null;
 
 		url.on('value', function(snapshot) {
 			result = snapshot.val();
 
-			if(result.signedPlayer.length < 2) {
+			if(result.signedPlayer && result.signedPlayer.length < 2) {
 				url = firebase.database().ref('game_room/'+id);
 			}
 
@@ -192,11 +190,16 @@ $(document).ready(function(){
 	}
 
 	function showSelector(roomData) {
-		_.forEach(roomData.signedPlayer, function(value, key){
-			var i = key+1;
+		var i = 1;
 
+		_.forEach(roomData.signedPlayer, function(value, key){
 			$('#selector-noplayer-'+i).hide();
 			$('#selector-'+i).show();
+
+			$('.button-plane.player-'+i).removeClass('selected');
+			$('.button-plane.player-'+i+'[data-id="'+value.selectedPlane+'"]').addClass('selected');
+
+			i++;
 		});
 	}
 });
