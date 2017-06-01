@@ -1,0 +1,22 @@
+{
+	"game_room": [
+		{
+			"name": "1",
+			"maxPlayers": 2,
+			"signedPlayer": [],
+			"isFull": false
+		},
+		{
+			"name": "2",
+			"maxPlayers": 2,
+			"signedPlayer": [],
+			"isFull": false
+		},
+		{
+			"name": "3",
+			"maxPlayers": 2,
+			"signedPlayer": [],
+			"isFull": false
+		}
+	]
+}

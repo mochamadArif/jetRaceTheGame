@@ -12,6 +12,8 @@ var DATA_ROOM_LIST = [{
 	signedPlayer: []
 }];
 
+var database = firebase.database();
+
 $(function(){
 	setTimeout(function() {
 		$('#splash-screen').fadeOut(function(){
@@ -85,11 +87,10 @@ function signOut() {
 	}
 }
 
-function initData(d) {
-	if(d) {
-		console.log(d);
-
-		generateRoomList(DATA_ROOM_LIST);
+function initData(user) {
+	if(user) {
+		$('#player-name').text(user.displayName);
+		$('#signed-view').attr('data-id', user.uid);
 	}
 }
 
@@ -105,61 +106,9 @@ function setUnsign() {
 }
 
 /* --------------------------------------------------------------------------------- */
-function generateRoomList(data) {
-	var roomList = $('#panel-list-room').find('#room-list');
-
-	roomList.html('');
-
-	setTimeout(function() {
-		$.each(data, function(i,v){
-			var htmlEntity = '';
-
-			htmlEntity += '<li>';
-			htmlEntity += '	<div id="button-join-'+v.id+'" class="room-info">';
-			htmlEntity += '		<h3>Hangar '+v.id+'</h3>';
-			htmlEntity += '		<div class="room-player">';
-
-			for(var x=0;x<v.maxPlayers;x++) {
-				htmlEntity += '			<div class="player-avatar">';
-				htmlEntity += '			</div>';
-			}
-
-			htmlEntity += '		</div>';
-			htmlEntity += '		<button class="button styled-button green join-room" id="button-join-'+v.id+'" data-id="'+v.id+'">Join</button>';
-			htmlEntity += '	</div>';
-			htmlEntity += '</li>';
-
-			roomList.append(htmlEntity);
-		});
-
-		$('.join-room').each(function(){
-			$(this).on('click', function() {
-				var id = $(this).data('id');
-				
-				generateRoom(id);
-			});
-		});
-	}, 100);
-}
-
-function generateRoom(id) {
-	$('#panel-user').hide();
-	$('.logo-main').hide();
-	$('#panel-list-room').hide();
-	$('#panel-room').show();
-
-	$('#back-to-menu').on('click', function() {
-		cancelRace(id);
-	});
-
-	$('#ready-game').on('click', function() {
-		// TODO : SET READY
-	});
-}
-
 function cancelRace(id) {
-	$('#panel-user').show();
-	$('.logo-main').show();
-	$('#panel-list-room').show();
+	$('#panel-user').fadeIn();
+	$('.logo-main').fadeIn();
+	$('#panel-list-room').fadeIn();
 	$('#panel-room').hide();
 }

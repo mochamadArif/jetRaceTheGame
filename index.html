@@ -12,17 +12,6 @@
 	</head>
 	<body>
 		<div class="site-wrap">
-			<!-- <header style="display: none;">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-sm-12 clearfix">
-							<h1 class="title pull-left">
-								<a href="#">Jet Race <small>The Game</small></a>
-							</h1>
-						</div>
-					</div>
-				</div>
-			</header> -->
 			<div class="main-content container-fluid">
 				<div class="row clearfix">
 					<div class="col-sm-12">
@@ -39,7 +28,7 @@
 							</div>
 						</div>
 
-						<div id="signed-view">
+						<div id="signed-view" data-id="">
 							<div id="panel-user">
 								<div class="clearfix">
 									<button class="button styled-button green pull-right" id="quickstart-sign-out">
@@ -47,7 +36,7 @@
 									</button>
 									<div class="player-data">
 										<div class="player-identity">
-											<h4 class="player-name">Hi, <small>Mochamad Arif Septian Putera</small></h4>
+											<h4 class="player-name">Hi, <small id="player-name"></small></h4>
 											<div class="player-points">
 												<span><i class="fa fa-play"></i> 0</span>&nbsp;&nbsp;<span><i class="fa fa-trophy"></i> 0</span>
 											</div>
@@ -175,12 +164,14 @@
 				storageBucket: "jet-race-the-game.appspot.com",
 				messagingSenderId: "790290538592"
 			};
+
 			firebase.initializeApp(config);
 		</script>
 
 		<script type="text/javascript" src="assets/js/vendor/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="assets/js/vendor/bootstrap.min.js"></script>
 		<script type="text/javascript" src="assets/js/utility.js"></script>
+		<script type="text/javascript" src="assets/js/roomHandler.js"></script>
 		<script type="text/javascript" src="assets/js/main.js"></script>
 	</body>
 </html>
