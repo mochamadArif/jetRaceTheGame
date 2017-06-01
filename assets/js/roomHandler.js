@@ -11,6 +11,17 @@ $(document).ready(function(){
 		});
 	}
 
+	function getRoomById(id){
+		var url = firebase.database().ref('game_room/'+id);
+		var result = null;
+
+		url.on('value', function(snapshot) {
+			result = snapshot.val();
+		});
+
+		return result;
+	}
+
 	function generateRoomList(data) {
 		var roomList = $('#panel-list-room').find('#room-list');
 
@@ -55,9 +66,10 @@ $(document).ready(function(){
 		$('#panel-list-room').hide();
 		$('#panel-room').fadeIn();
 		
-		var players = [];
+		var datum_room = getRoomById(id);
+		var players = datum_room.signedPlayer ? (datum_room.signedPlayer.length ? datum_room.signedPlayer : []) : [];
 
-		players.push(uid);
+		_.indexOf(datum_room, uid) > -1 ? null : players.push(uid);
 
 		var content = {
 			signedPlayer: players
