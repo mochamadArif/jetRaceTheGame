@@ -143,6 +143,23 @@ function generateRoomList(data) {
 }
 
 function generateRoom(id) {
+	$('#panel-user').hide();
+	$('.logo-main').hide();
 	$('#panel-list-room').hide();
 	$('#panel-room').show();
+
+	$('#back-to-menu').on('click', function() {
+		cancelRace(id);
+	});
+
+	$('#ready-game').on('click', function() {
+		// TODO : SET READY
+	});
+}
+
+function cancelRace(id) {
+	$('#panel-user').show();
+	$('.logo-main').show();
+	$('#panel-list-room').show();
+	$('#panel-room').hide();
 }

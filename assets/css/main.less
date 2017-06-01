@@ -170,6 +170,7 @@ header {
 	ul {
 		margin: 0;
 		padding: 0;
+		text-align: center;
 
 		li {
 			list-style: none;
@@ -224,7 +225,20 @@ header {
 }
 
 #panel-room {
+	position: relative;
 	display: none;
+
+	.room-header {
+		position: relative;
+
+		#back-to-menu {
+			position: absolute;
+		}
+
+		h4 {
+			text-align: center;
+		}
+	}
 
 	#players {
 		ul {
@@ -253,7 +267,23 @@ header {
 		}
 	}
 
+	.selection-block {
+		.player-name {
+			text-align: center;
+			display: block;
+			width: 100%;
+		}
+	}
+
+	.selection-block-separator {
+		text-align: center;
+	}
+
 	#plane-selector {
+		h5 {
+			text-align: center;
+		}
+
 		.scroll {
 			position: relative;
 			overflow-x: scroll;
@@ -261,8 +291,9 @@ header {
 			background-color: #d0d0d0;
 			padding: 3px;
 			margin-bottom: 10px;
-			height: 100px;
+			height: 130px;
 			width: 100%;
+			text-align: center;
 
 			ul {
 				margin: 0;
@@ -275,16 +306,31 @@ header {
 			}
 		}
 
+		.player-avatar {
+			background-color: #222;
+			width: 35px;
+			height: 35px;
+			margin: 0 auto;
+			margin-top: 4px;
+			.rounded(100%)
+		}
+
 		button {
 			&.button-plane {
-				width: 100px;
-				height: 94px;
+				width: 85px;
+				height: 85px;
 			}
 		}
 	}
 
-	.room-status {
-		font-size: 12px;
+	.room-control {
+		margin-top: 20px;
+		text-align: center;
+
+		.room-status {
+			font-size: 12px;
+			margin-bottom: 10px;
+		}
 	}
 }
 
