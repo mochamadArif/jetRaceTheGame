@@ -22,6 +22,34 @@ header {
 	}
 }
 
+.site-wrap {
+	position: relative;
+	z-index: 1;
+	max-width: 300px;
+	margin: 0 auto;
+}
+
+#splash-screen {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	z-index: 99;
+
+	.logo {
+		position: absolute;
+		background-color: purple;
+		width: 200px;
+		height: 130px;
+		margin: 0 auto;
+		left: 0;
+		right: 0;
+		top: 20px;
+	}
+}
+
 #game {
 	position: absolute;
 	background-color: #d0d0d0;
@@ -39,8 +67,40 @@ header {
 	}
 }
 
+#panel-login {
+	.logo {
+		background-color: purple;
+		width: 200px;
+		height: 130px;
+		margin: 0 auto;
+		left: 0;
+		right: 0;
+		top: 20px;
+	}
+
+	.login-control {
+		margin-top: 100px;
+		text-align: center;
+
+		#quickstart-sign-in {
+			width: 120px;
+		}
+	}
+}
+
 #signed-view {
 	display: none;
+
+	.logo-main {
+		background-color: red;
+		width: 200px;
+		height: 130px;
+		margin: 0 auto;
+		margin-top: 20px;
+		margin-bottom: 20px;
+		left: 0;
+		right: 0;
+	}
 }
 
 #panel-user {
@@ -53,29 +113,21 @@ header {
 	.player-data {
 		.player-identity {
 			position: relative;
-			min-height: 48px;
+			min-height: 26px;
 			margin-bottom: 10px;
-			padding-left: 60px;
-
-			.player-avatar {
-				position: absolute;
-				left: 0;
-				width: 48px;
-				height: 48px;
-				overflow: hidden;
-				background-color: #333;
-				.rounded(100%);
-			}
+			padding-right: 60px;
 
 			h4.player-name {
-				padding-right: 40px;
-			}
-		}
-
-		.player-points {
-			h3 {
-				text-align: right;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
 				margin-bottom: 0;
+			}
+
+			.player-points {
+				h4 {
+					margin-bottom: 0;
+				}
 			}
 		}
 	}
@@ -83,15 +135,36 @@ header {
 	#quickstart-sign-out {
 		z-index: 2;
 		position: absolute;
-		top: 15px;
-		right: 15px;
+		width: 26px;
+		height: 26px;
+		top: 0;
+		right: 0;
 	}
 }
 
 #panel-list-room {
+	@item_size: 120px;
+
+	margin-top: 50px;
+
+	h4 {
+		font-size: 14px;
+		text-align: center;
+	}
+
 	.room-list-container {
-		max-height: 250px;
-		overflow-y: auto;
+		// max-height: 250px;
+		// overflow-x: auto;
+	}
+
+	.scroll {
+		position: relative;
+		overflow-x: scroll;
+		white-space: nowrap;
+		background-color: #d0d0d0;
+		margin-bottom: 10px;
+		height: @item_size;
+		width: 100%;
 	}
 
 	ul {
@@ -100,23 +173,52 @@ header {
 
 		li {
 			list-style: none;
+			display: inline-block;
 			position: relative;
-			border-bottom: solid 1px #d0d0d0;
+			margin-right: 5px;
+
+			&:last-child {
+				margin-right: 0;
+			}
 		}
 	}
 
 	.room-info {
-		padding-right: 80px;
-		padding-bottom: 10px;
-	}
+		h3 {
+			margin: 0;
+			font-size: 16px;
+			padding: 5px;
+			text-align: center;
+		}
 
-	button {
-		&.join-room {
-			position: absolute;
-			right: 0;
-			top: 0;
-			height: 40px;
-			width: 80px;
+		width: @item_size;
+		height: @item_size;
+		background-color: white;
+
+		button {
+			&.join-room {
+				position: absolute;
+				margin: 0 auto;
+				bottom: 5px;
+				left: 0;
+				right: 0;
+				width: 90%;
+			}
+		}
+
+		.room-player {
+			margin-top: 8px;
+			display: flex;
+			justify-content: center;
+
+			.player-avatar {
+				width: 40px;
+				height: 40px;
+				display: inline-block;
+				background-color: #222;
+				margin: 0 3px;
+				.rounded(100%);
+			}
 		}
 	}
 }
@@ -189,7 +291,8 @@ header {
 .loading {
 	position: absolute;
 	left: 0;
-	top: 50px;
+	top: 0;
+	// top: 50px;
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.5);

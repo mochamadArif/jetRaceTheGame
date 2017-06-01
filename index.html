@@ -12,7 +12,7 @@
 	</head>
 	<body>
 		<div class="site-wrap">
-			<header>
+			<!-- <header style="display: none;">
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-sm-12 clearfix">
@@ -22,102 +22,112 @@
 						</div>
 					</div>
 				</div>
-			</header>
+			</header> -->
 			<div class="main-content container-fluid">
 				<div class="row clearfix">
 					<div class="col-sm-12">
 
-						<div id="panel-login" class="panel">
-							<div class="panel-body">
-								<h4>Sign In</h4>
+						<div id="panel-login">
+							<div class="logo">
+								Logo
+							</div>
+
+							<div class="login-control">
 								<button class="button styled-button green" id="quickstart-sign-in">
-									<i class="fa fa-google"></i> Masuk dengan Akun Google
+									<i class="fa fa-google"></i> Login Google
 								</button>
 							</div>
 						</div>
 
 						<div id="signed-view">
-							<div id="panel-user" class="panel">
-								<div class="panel-body clearfix">
+							<div id="panel-user">
+								<div class="clearfix">
 									<button class="button styled-button green pull-right" id="quickstart-sign-out">
 										<i class="fa fa-power-off"></i>
 									</button>
 									<div class="player-data">
 										<div class="player-identity">
-											<div class="player-avatar">
-												<img src="" />
+											<h4 class="player-name">Hi, <small>Mochamad Arif Septian Putera</small></h4>
+											<div class="player-points">
+												<span><i class="fa fa-play"></i> 0</span>&nbsp;&nbsp;<span><i class="fa fa-trophy"></i> 0</span>
 											</div>
-											<h4 class="player-name">Mochamad Arif Septian Putera</h4>
-										</div>
-										<div class="player-points">
-											<h3>0 <small>win</small> / 0 <small>lose</small></h3>
 										</div>
 									</div>
 								</div>
 							</div>
 
-							<div id="panel-list-room" class="panel">
-								<div class="panel-body">
-									<h4>Game Room</h4>
-									<div class="room-list-container">
+							<div class="logo-main">
+								Logo
+							</div>
+
+							<div id="panel-list-room">
+								<h4>Please select your hangar!</h4>
+								<div class="room-list-container">
+									<div class="scroll">
 										<ul id="room-list"></ul>
 									</div>
 								</div>
 							</div>
-						</div>
 
-						<div id="panel-room" class="panel">
-							<div class="panel-body">
-								<h4>Room #01</h4>
-								<div id="players">
-									<ul>
-										<li>
-											<div class="player-data" title="Mochamad Arif Septian Putera">
-												<div class="player-avatar">
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="player-data nodata" title="Waiting for other player ...">
-												<div class="player-avatar">
-												</div>
-											</div>
-										</li>
-									</ul>
-								</div>
-								<div id="plane-selector">
-									<h5>Plane Selection</h5>
-									<div class="scroll">
+							<div id="panel-room" class="panel">
+								<div class="panel-body">
+									<h4>Room #01</h4>
+									<div id="players">
 										<ul>
 											<li>
-												<button class="button-plane">
-													Plane 1
-												</button>
+												<div class="player-data" title="Mochamad Arif Septian Putera">
+													<div class="player-avatar">
+													</div>
+												</div>
 											</li>
 											<li>
-												<button class="button-plane">
-													Plane 2
-												</button>
-											</li>
-											<li>
-												<button class="button-plane">
-													Plane 3
-												</button>
+												<div class="player-data nodata" title="Waiting for other player ...">
+													<div class="player-avatar">
+													</div>
+												</div>
 											</li>
 										</ul>
 									</div>
-								</div>
-								<div>
-									<div class="room-status">Waiting for other player ...</div>
-									<button class="button styled-button green" id="start-game">
-										Start Game
-									</button>
+									<div id="plane-selector">
+										<h5>Plane Selection</h5>
+										<div class="scroll">
+											<ul>
+												<li>
+													<button class="button-plane">
+														Plane 1
+													</button>
+												</li>
+												<li>
+													<button class="button-plane">
+														Plane 2
+													</button>
+												</li>
+												<li>
+													<button class="button-plane">
+														Plane 3
+													</button>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div>
+										<div class="room-status">Waiting for other player ...</div>
+										<button class="button styled-button green" id="start-game">
+											Start Game
+										</button>
+									</div>
 								</div>
 							</div>
 						</div>
 
 					</div>
 				</div>
+			</div>
+		</div>
+
+		<div id="splash-screen">
+			<div class="logo">
+				Logo
 			</div>
 		</div>
 

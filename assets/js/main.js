@@ -13,19 +13,23 @@ var DATA_ROOM_LIST = [{
 }];
 
 $(function(){
-	$('#quickstart-sign-in').on('click', function(){
-		var $this = $(this);
+	setTimeout(function() {
+		$('#splash-screen').fadeOut(function(){
+			$('#quickstart-sign-in').on('click', function(){
+				var $this = $(this);
 
-		if(!firebase.auth().currentUser) {
-			var provider = new firebase.auth.GoogleAuthProvider();
-			provider.addScope('https://www.googleapis.com/auth/plus.login');
-			firebase.auth().signInWithRedirect(provider);
-		}
-	});
+				if(!firebase.auth().currentUser) {
+					var provider = new firebase.auth.GoogleAuthProvider();
+					provider.addScope('https://www.googleapis.com/auth/plus.login');
+					firebase.auth().signInWithRedirect(provider);
+				}
+			});
 
-	$('#quickstart-sign-out').on('click', signOut);
+			$('#quickstart-sign-out').on('click', signOut);
 
-	goAuth();
+			goAuth();
+		});
+	}, 2000);
 });
 
 function goAuth() {
@@ -40,8 +44,6 @@ function goAuth() {
         }
 
         var user = result.user;
-
-        console.log('sign in')
 
 	}).catch(function(error) {
 		var errorCode = error.code;
@@ -113,13 +115,18 @@ function generateRoomList(data) {
 			var htmlEntity = '';
 
 			htmlEntity += '<li>';
-			htmlEntity += '	<div id="list-room-'+v.id+'" class="room-info">';
-			htmlEntity += '		<h3>#'+v.id+'</h3>';
-			htmlEntity += '		Players <span>'+v.signedPlayer.length+'</span> of <span>'+v.maxPlayers+'</span>';
+			htmlEntity += '	<div id="button-join-'+v.id+'" class="room-info">';
+			htmlEntity += '		<h3>Hangar '+v.id+'</h3>';
+			htmlEntity += '		<div class="room-player">';
+
+			for(var x=0;x<v.maxPlayers;x++) {
+				htmlEntity += '			<div class="player-avatar">';
+				htmlEntity += '			</div>';
+			}
+
+			htmlEntity += '		</div>';
+			htmlEntity += '		<button class="button styled-button green join-room" id="button-join-'+v.id+'" data-id="'+v.id+'">Join</button>';
 			htmlEntity += '	</div>';
-			htmlEntity += '	<button class="button styled-button green join-room" id="button-join-'+v.id+'" data-id="'+v.id+'">';
-			htmlEntity += '		Join';
-			htmlEntity += '	</button>';
 			htmlEntity += '</li>';
 
 			roomList.append(htmlEntity);
@@ -136,5 +143,6 @@ function generateRoomList(data) {
 }
 
 function generateRoom(id) {
+	$('#panel-list-room').hide();
 	$('#panel-room').show();
 }
