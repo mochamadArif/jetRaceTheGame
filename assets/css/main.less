@@ -325,6 +325,17 @@ body {
 					background-color: fade(#FF207B, 40%);
 					box-shadow: 0 0 10px #FF207B;
 				}
+
+				img {
+					display: none;
+					-webkit-backface-visibility: hidden; 
+				    -ms-transform: translateZ(0); /* IE 9 */
+				    -webkit-transform: translateZ(0); /* Chrome, Safari, Opera */
+				    transform: translateZ(0);
+
+					width: 100%;
+					height: 100%;
+				}
 			}
 		}
 	}
@@ -333,6 +344,7 @@ body {
 #panel-room {
 	position: relative;
 	display: none;
+	margin-top: 10px;
 
 	.room-header {
 		position: relative;
@@ -419,6 +431,19 @@ body {
 			letter-spacing: 1px;
 			color: #fff;
 		}
+
+		&.ready-player {
+			display: none;
+			justify-content: center;
+			align-items: center;
+			height: 137px;
+			width: 100%;
+			text-align: center;
+			font-family: @FONT_LEMON;
+			font-size: 20px;
+			letter-spacing: 1px;
+			color: red;
+		}
 	}
 
 	.selection-block-separator {
@@ -426,6 +451,8 @@ body {
 		font-family: @FONT_LEMON;
 		letter-spacing: 1px;
 		color: #fff;
+		margin-bottom: 18px;
+    	margin-top: 18px;
 	}
 
 	#plane-selector {
@@ -435,6 +462,7 @@ body {
 			font-family: @FONT_LEMON;
 			letter-spacing: 1px;
 			color: #fff;
+			margin-bottom: 30px;
 		}
 
 		.scroll {
@@ -444,7 +472,7 @@ body {
 			background-color: transparent;
 			padding: 3px;
 			margin-bottom: 10px;
-			height: 137px;
+			height: 138px;
 			width: 100%;
 			text-align: center;
 
@@ -460,6 +488,7 @@ body {
 		}
 
 		.player-avatar {
+			overflow: hidden;
 			background-color: #222;
 			width: 35px;
 			height: 35px;
@@ -478,6 +507,24 @@ body {
 				background-color: fade(#FF207B, 40%);
 				box-shadow: 0 0 10px #FF207B;
 			}
+
+			img {
+				-webkit-backface-visibility: hidden; 
+			    -ms-transform: translateZ(0); /* IE 9 */
+			    -webkit-transform: translateZ(0); /* Chrome, Safari, Opera */
+			    transform: translateZ(0);
+
+				width: 100%;
+				height: 100%;
+				opacity: 0;
+				.transition();
+				.scale(1.2);
+
+				&.selected {
+					opacity: 1;
+					.scale(1);
+				}
+			}
 		}
 
 		button {
@@ -490,8 +537,13 @@ body {
 				.transition();
 
 				img {
-					.transition();
+					-webkit-backface-visibility: hidden; 
+				    -ms-transform: translateZ(0); /* IE 9 */
+				    -webkit-transform: translateZ(0); /* Chrome, Safari, Opera */
+				    transform: translateZ(0);
+
 					width: 100%;
+					.transition();
 					.scale(0.8);
 				}
 
@@ -535,6 +587,147 @@ body {
 					font-size: 14px;
 				}
 			}
+		}
+	}
+}
+
+#panel-game {
+	display: none;
+
+	.game {
+		position: absolute;
+	    width: 100%;
+	    height: 100%;
+	    top: 0;
+	    left: 0;
+
+	    .pesawat {
+	    	position: absolute;
+	    	width: 130px;
+	    	height: 143px;
+	    	top: 135px;
+	    	left: 0;
+	    	right: 0;
+	    	margin: 0 auto;
+
+	    	img {
+	    		width: inherit;
+	    		height: inherit;
+	    	}
+	    }
+
+	    .question-panel {
+    	    position: absolute;
+		    bottom: 50px;
+		    text-align: center;
+		    width: 100%;
+		    color: #fff;
+		    font-family: @FONT_LEMON;
+			letter-spacing: 1px;
+
+			.question {
+				font-size: 22px;
+				margin-bottom: 10px;
+			}
+
+			.choice {
+				text-align: center;
+
+				button {
+					display: block;
+					width: 250px;
+					height: 50px;
+					background-color: transparent;
+					border: solid 1px #fff;
+					color: #fff;
+					font-family: @FONT_LEMON;
+					letter-spacing: 1px;
+					margin: 0 auto;
+   					margin-bottom: 10px;
+   					font-size: 20px;
+   					box-shadow: 0 0 3px #fff;
+   					.rounded(3px);
+
+   					&.selected, &:hover {
+   						text-shadow: 0 0 10px #20C7D9;
+   						box-shadow: 0 0 3px #20C7D9;
+   						background-color: fade(#20C7D9, 40%);
+   					}
+				}
+			}
+	    }
+	}
+
+	.bar-panel {
+		position: absolute;
+		background-color: fade(#fff, 20%);
+		width: 30px;
+		height: 280px;
+		right: 16px;
+		top: 60px;
+
+		.rounded(8px);
+
+		.ruler {
+			width: 1px;
+		    height: 205px;
+		    left: 0;
+		    right: 0;
+		    top: 40px;
+		    margin: 0 auto;
+		    position: absolute;
+		    border: dashed 1px #fff;
+
+		    &:before, &:after {
+				display: block;
+				content: "";
+				position: absolute;
+				background-size: contain;
+				width: 31px;
+				height: 20px;
+				left: 0;
+				right: 0;
+				margin: 0 auto;
+				z-index: 2;
+			}
+
+			&:before {
+				background-image: url('../images/pin-1.png');
+				background-repeat: no-repeat;
+				left: -23px;
+				bottom: -12px;
+			}
+
+			&:after {
+				background-image: url('../images/pin-2.png');
+				background-repeat: no-repeat;
+				bottom: -12px;
+			}
+		}
+
+		&:before, &:after {
+			display: block;
+			content: "";
+			position: absolute;
+			background-size: contain;
+			width: 20px;
+			height: 20px;
+			left: 0;
+			right: 0;
+			margin: 0 auto;
+			z-index: 2;
+		}
+
+		&:before {
+			background-image: url('../images/satelit.png');
+			background-repeat: no-repeat;
+			top: 8px;
+		}
+
+		&:after {
+			background-image: url('../images/saturn.png');
+			background-repeat: no-repeat;
+			bottom: 8px;
 		}
 	}
 }

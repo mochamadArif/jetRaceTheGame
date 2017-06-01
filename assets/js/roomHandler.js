@@ -37,7 +37,7 @@ $(document).ready(function(){
 				htmlEntity += '		<div class="room-player">';
 
 				for(var x=0;x<v.maxPlayers;x++) {
-					htmlEntity += '			<div class="player-avatar color-'+x+'">';
+					htmlEntity += '			<div id="player-avatar-room-'+x+'" class="player-avatar color-'+x+'">';
 					htmlEntity += '			</div>';
 				}
 
@@ -71,8 +71,6 @@ $(document).ready(function(){
 
 		showLoadingPage();
 
-		var datum_room = getRoomById(id);
-
 		firebase.database().ref('game_room/' + id + '/signedPlayer/' + uid).update({
 			selectedPlane: 0,
 			isReady: false
@@ -82,6 +80,14 @@ $(document).ready(function(){
 				/* SET ROOM DATA */
 				setRace(id, uid);
 			});
+
+			var datum_room = getRoomById(id);
+
+			if(datum_room.signedPlayer && _.keys(datum_room.signedPlayer).length >= datum_room.maxPlayers) {
+				firebase.database().ref('game_room/' + id).update({
+					isFull: true
+				});
+			}
 
 			hideLoadingPage();
 		}).catch(function(error) {
@@ -100,25 +106,25 @@ $(document).ready(function(){
 		var datum_room = getRoomById(id);
 
 		if(datum_room.signedPlayer) {
-			var idx = _.indexOf(datum_room.signedPlayer, uid);
-			
-			datum_room.signedPlayer.splice(idx, 1);
+			_.forEach(datum_room.signedPlayer, function(value, key){
+				if(key == uid) {
+					firebase.database().ref('game_room/'+ id + '/signedPlayer/' + key).remove().then(function(){
+						firebase.database().ref('game_room/'+ id).update({ isFull: false }).then(function(){
+							$('#panel-user').fadeIn();
+							$('.logo-main').fadeIn();
+							$('#panel-list-room').fadeIn();
+							$('#signed-view').attr('data-inroom', false);
+							$('#panel-room').hide();
+							hideLoadingPage();
+						}).catch(function(error) {
+							console("Data could not be saved." + error);
+							hideLoadingPage();
+						});
 
-			content = {
-				signedPlayer: datum_room.signedPlayer,
-				isFull: false
-			}
-
-			firebase.database().ref('game_room/' + id).update(content).then(function(){
-				$('#panel-user').fadeIn();
-				$('.logo-main').fadeIn();
-				$('#panel-list-room').fadeIn();
-				$('#signed-view').attr('data-inroom', false);
-				$('#panel-room').hide();
-				hideLoadingPage();
-			}).catch(function(error) {
-				console("Data could not be saved." + error);
-				hideLoadingPage();
+					}).catch(function(error) {
+						console("Data could not be saved." + error);
+					});
+				}
 			});
 		}
 	}
@@ -145,11 +151,23 @@ $(document).ready(function(){
 			});
 		}
 
+		firebase.database().ref('players/').on('value', function(snapshot) {
+			var result = snapshot.val();
+
+			_.forEach(result, function(value, key) {
+				if(key == uid) {
+					$('#player-name-'+playerKey).text(value.name);
+				}
+			});
+		});
+
 		$('.button-plane.player-'+playerKey).each(function(){
 			$(this).on('click', function(){
 				$('.button-plane.player-'+playerKey).removeClass('selected');
+				$('.button-plane.player-'+playerKey).parent().find('.player-avatar img').removeClass('selected');
 				
 				$(this).addClass('selected');
+				$(this).parent().find('.player-avatar img').addClass('selected');
 
 				var planeID = $(this).data('id');
 
@@ -162,8 +180,7 @@ $(document).ready(function(){
 		});
 
 		$('#ready-game').on('click', function() {
-			var selectedPlaneId = $('.button-plane.selected').data('id');
-			setReady(roomData, playerKey, selectedPlaneId)
+			setReady(idRoom, uid, playerKey)
 		});
 	}
 
@@ -178,15 +195,46 @@ $(document).ready(function(){
 				url = firebase.database().ref('game_room/'+id);
 			}
 
+			goToGame(result, id);
 			showSelector(result);
 		}, function(error) {
 			console.log(error)
 		});
 	}
 
-	function setReady(data, playerKey, planeId) {
+	function setReady(idRoom, uid, pKey) {
+		/*$('#selector-readyplayer-'+pKey).show();
+		$('#selector-'+pKey).hide();*/
 		$('#ready-game').hide();
 		$('.room-status').show();
+
+		firebase.database().ref('game_room/'+ idRoom +'/signedPlayer/'+ uid ).update({ isReady: true }).then(function(){
+			checkOtherPlayer(idRoom);
+		}).catch(function(error) {
+			console("Data could not be saved." + error);
+		});
+
+	}
+
+	function goToGame(roomData, idRoom) {
+		var playersReady = 0;
+
+		_.forEach(roomData.signedPlayer, function(value, key){
+			if(value.isReady) {
+				playersReady = playersReady + 1;
+			}
+		});
+
+		if(playersReady == roomData.maxPlayers) {
+			firebase.database().ref('game_room/'+ idRoom ).update({ isPlaying: true }).then(function(){
+				
+				$('#panel-room').hide();
+				$('#panel-game').fadeIn();
+
+			}).catch(function(error) {
+				console("Data could not be saved." + error);
+			});
+		}
 	}
 
 	function showSelector(roomData) {
@@ -196,8 +244,23 @@ $(document).ready(function(){
 			$('#selector-noplayer-'+i).hide();
 			$('#selector-'+i).show();
 
+			/*var keyUid = key;
+
+			firebase.database().ref('players/').on('value', function(snapshot) {
+				var result = snapshot.val();
+
+				_.forEach(result, function(value, key) {
+					if(key == keyUid) {
+						$('#player-name-'+i).text(value.name);
+					}
+				});
+			});*/
+
 			$('.button-plane.player-'+i).removeClass('selected');
 			$('.button-plane.player-'+i+'[data-id="'+value.selectedPlane+'"]').addClass('selected');
+
+			$('.button-plane.player-'+i).parent().find('.player-avatar img').removeClass('selected');
+			$('.button-plane.player-'+i+'[data-id="'+value.selectedPlane+'"]').parent().find('.player-avatar img').addClass('selected');
 
 			i++;
 		});

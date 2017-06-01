@@ -12,9 +12,9 @@
 	</head>
 	<body>
 		<div class="bg">
-			<div class="planet"></div>
+			<!-- <div class="planet"></div>
 			<div class="layer-1"></div>
-			<div class="layer-0"></div>
+			<div class="layer-0"></div> -->
 		</div>
 		<div class="site-wrap">
 			<div class="main-content container-fluid">
@@ -77,6 +77,9 @@
 									<div id="selector-noplayer-1" class="selection-block no-player">
 										Waiting other player to join
 									</div>
+									<div id="selector-readyplayer-1" class="selection-block ready-player">
+										READY
+									</div>
 									<div id="selector-1" class="selection-block">
 										<span id="player-name-1" class="player-name">
 											John
@@ -87,19 +90,25 @@
 													<button class="button-plane player-1 selected" data-id="0">
 														<img src="assets/images/pesawat-1-biru.png" />
 													</button>
-													<div class="player-avatar color-0"></div>
+													<div class="player-avatar color-0">
+														<img src="assets/images/profile-1.png" />
+													</div>
 												</li>
 												<li>
 													<button class="button-plane player-1" data-id="1">
 														<img src="assets/images/pesawat-2-biru.png" />
 													</button>
-													<div class="player-avatar color-0"></div>
+													<div class="player-avatar color-0">
+														<img src="assets/images/profile-1.png" />
+													</div>
 												</li>
 												<li>
 													<button class="button-plane player-1" data-id="2">
 														<img src="assets/images/pesawat-3-biru.png" />
 													</button>
-													<div class="player-avatar color-0"></div>
+													<div class="player-avatar color-0">
+														<img src="assets/images/profile-1.png" />
+													</div>
 												</li>
 											</ul>
 										</div>
@@ -109,6 +118,9 @@
 									</div>
 									<div id="selector-noplayer-2" class="selection-block no-player">
 										Waiting other player to join
+									</div>
+									<div id="selector-readyplayer-2" class="selection-block ready-player">
+										READY
 									</div>
 									<div id="selector-2" class="selection-block">
 										<span id="player-name-2" class="player-name">
@@ -120,19 +132,25 @@
 													<button class="button-plane player-2 selected" data-id="0">
 														<img src="assets/images/pesawat-1-merah.png" />
 													</button>
-													<div class="player-avatar color-1"></div>
+													<div class="player-avatar color-1">
+														<img src="assets/images/profile-2.png" />
+													</div>
 												</li>
 												<li>
 													<button class="button-plane player-2" data-id="1">
 														<img src="assets/images/pesawat-2-merah.png" />
 													</button>
-													<div class="player-avatar color-1"></div>
+													<div class="player-avatar color-1">
+														<img src="assets/images/profile-2.png" />
+													</div>
 												</li>
 												<li>
 													<button class="button-plane player-2" data-id="2">
 														<img src="assets/images/pesawat-3-merah.png" />
 													</button>
-													<div class="player-avatar color-1"></div>
+													<div class="player-avatar color-1">
+														<img src="assets/images/profile-2.png" />
+													</div>
 												</li>
 											</ul>
 										</div>
@@ -147,6 +165,35 @@
 							</div>
 						</div>
 
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="panel-game">
+			<div class="game">
+				<div class="bar-panel">
+					<div class="ruler"></div>
+				</div>
+
+				<div class="pesawat pesawat-1">
+					<img src="assets/images/pesawat-player-1.png" />
+				</div>
+				<div class="pesawat pesawat-2">
+					<img src="assets/images/pesawat-player-2.png" />
+				</div>
+
+				<div class="question-panel">
+					<div class="question">
+						2 x 4
+					</div>
+					<div class="choice">
+						<button id="answer-0" data-answer=true>
+							8
+						</button>
+						<button id="answer-1" data-answer=false>
+							5
+						</button>
 					</div>
 				</div>
 			</div>
