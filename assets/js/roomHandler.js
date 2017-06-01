@@ -69,7 +69,7 @@ $(document).ready(function(){
 		var datum_room = getRoomById(id);
 		var players = datum_room.signedPlayer ? (datum_room.signedPlayer.length ? datum_room.signedPlayer : []) : [];
 
-		if(_.indexOf(datum_room, uid) == -1) {
+		if(_.indexOf(datum_room.signedPlayer, uid) == -1) {
 			players.push(uid);
 			firebase.database().ref('game_room/' + id).update({ signedPlayer: players });
 		}
