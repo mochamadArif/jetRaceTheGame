@@ -1,25 +1,9 @@
 @import "elements.less";
+@import "font.less";
 @import "font-awesome.less";
 
 body {
-	background-color: #d0d0d0;
-}
-
-header {
-	height: 50px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	background-color: #251149;
-
-	h1.title {
-		font-size: 18px;
-		margin: 5px 0 6px;
-
-		a {
-			color: #fff;
-			text-decoration: none;
-		}
-	}
+	background-color: #271e54;
 }
 
 .site-wrap {
@@ -35,7 +19,7 @@ header {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: #000;
+	background-color: #271e54;
 	z-index: 99;
 
 	.logo {
@@ -83,7 +67,22 @@ header {
 		text-align: center;
 
 		#quickstart-sign-in {
-			width: 120px;
+			width: 185px;
+			background-color: transparent;
+			padding: 10px 15px;
+			border: solid 2px #20C7D9;
+			color: #20C7D9;
+			font-size: 12px;
+			outline: none;
+			.transition();
+
+			&:hover {
+				background-color: fade(#20C7D9, 50%);
+			}
+
+			i {
+				font-size: 14px;
+			}
 		}
 	}
 }
@@ -116,17 +115,30 @@ header {
 			min-height: 26px;
 			margin-bottom: 10px;
 			padding-right: 60px;
+			padding-top: 5px;
 
 			h4.player-name {
 				overflow: hidden;
 				white-space: nowrap;
 				text-overflow: ellipsis;
 				margin-bottom: 0;
+				color: #fff;
+				font-family: @FONT_LEMON;
+				letter-spacing: 1px;
+				font-size: 16px;
+
+				small {
+					color: inherit;
+				}
 			}
 
 			.player-points {
-				h4 {
-					margin-bottom: 0;
+				margin-top: 5px;
+				color: #fff;
+				font-family: @FONT_LEMON;
+
+				i {
+					color: #FF207B;
 				}
 			}
 		}
@@ -136,20 +148,29 @@ header {
 		z-index: 2;
 		position: absolute;
 		width: 26px;
-		height: 26px;
+		height: 36px;
+		padding: 0;
 		top: 0;
 		right: 0;
+		color: #20C7D9;
+		font-size: 26px;
+		background-color: transparent;
+		border: 0;
+		text-shadow: 0 0 10px #20C7D9;
+		.transition();
 	}
 }
 
 #panel-list-room {
-	@item_size: 120px;
-
 	margin-top: 50px;
 
 	h4 {
-		font-size: 14px;
+		font-size: 11px;
 		text-align: center;
+		font-family: @FONT_LEMON;
+		letter-spacing: 1px;
+		color: #fff;
+		margin-bottom: 25px;
 	}
 
 	.room-list-container {
@@ -161,9 +182,8 @@ header {
 		position: relative;
 		overflow-x: scroll;
 		white-space: nowrap;
-		background-color: #d0d0d0;
-		margin-bottom: 10px;
-		height: @item_size;
+		margin-bottom: 20px;
+		height: 140px;
 		width: 100%;
 	}
 
@@ -176,7 +196,7 @@ header {
 			list-style: none;
 			display: inline-block;
 			position: relative;
-			margin-right: 5px;
+			margin-right: 15px;
 
 			&:last-child {
 				margin-right: 0;
@@ -190,11 +210,16 @@ header {
 			font-size: 16px;
 			padding: 5px;
 			text-align: center;
+			color: #fff;
+			font-family: @FONT_LEMON;
+			font-size: 12px;
 		}
 
-		width: @item_size;
-		height: @item_size;
-		background-color: white;
+		width: 120px;
+		height: 140px;
+		background-color: transparent;
+		border: solid 1px #fff;
+		.rounded(5px);
 
 		button {
 			&.join-room {
@@ -204,6 +229,21 @@ header {
 				left: 0;
 				right: 0;
 				width: 90%;
+				background-color: transparent;
+				border: 0;
+				font-family: @FONT_LEMON;
+				color: #20C7D9;
+				.transition();
+				text-shadow: 0 0 10px #20C7D9;
+
+				&.full {
+					color: #FF207B;
+					text-shadow: 0 0 10px #FF207B;
+
+					&:hover {
+						text-shadow: 0 0 10px #FF207B;
+					}
+				}
 			}
 		}
 
@@ -216,7 +256,7 @@ header {
 				width: 40px;
 				height: 40px;
 				display: inline-block;
-				background-color: #222;
+				border: solid 1px #fff;
 				margin: 0 3px;
 				.rounded(100%);
 			}

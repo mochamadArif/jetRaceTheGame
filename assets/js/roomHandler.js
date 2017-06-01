@@ -32,8 +32,8 @@ $(document).ready(function(){
 				var htmlEntity = '';
 
 				htmlEntity += '<li>';
-				htmlEntity += '	<div id="button-join-'+i+'" class="room-info">';
-				htmlEntity += '		<h3>Hangar '+v.name+'</h3>';
+				htmlEntity += '	<div id="join-'+i+'" class="room-info">';
+				htmlEntity += '		<h3>Hangar&nbsp&nbsp'+v.name+'</h3>';
 				htmlEntity += '		<div class="room-player">';
 
 				for(var x=0;x<v.maxPlayers;x++) {
@@ -42,7 +42,11 @@ $(document).ready(function(){
 				}
 
 				htmlEntity += '		</div>';
-				htmlEntity += '		<button class="button styled-button green join-room" id="button-join-'+i+'" data-id="'+i+'">Join</button>';
+				if(!v.isFull) {
+					htmlEntity += '<button class="button styled-button green join-room" id="button-join-'+i+'" data-id="'+i+'">Join</button>';
+				}else {
+					htmlEntity += '<button class="button styled-button green join-room full" data-id="'+i+'" disabled="disabled">Full</button>';
+				}
 				htmlEntity += '	</div>';
 				htmlEntity += '</li>';
 
@@ -98,8 +102,11 @@ $(document).ready(function(){
 
 			if(!content.isFull) {
 				firebase.database().ref('game_room/' + id).update(content).then(function(){
+					// $('#button-join-'+id).attr('disabled', true);
+
 					$('#signed-view').attr('data-inroom', true);
 					$('#panel-room').fadeIn();
+
 					hideLoadingPage();
 				}).catch(function(error) {
 					console("Data could not be saved." + error);
