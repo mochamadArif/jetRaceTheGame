@@ -11,6 +11,11 @@
 		<link rel="stylesheet" type="text/css" href="assets/css/main.css">
 	</head>
 	<body>
+		<div class="bg">
+			<div class="planet"></div>
+			<div class="layer-1"></div>
+			<div class="layer-0"></div>
+		</div>
 		<div class="site-wrap">
 			<div class="main-content container-fluid">
 				<div class="row clearfix">
@@ -18,7 +23,7 @@
 
 						<div id="panel-login">
 							<div class="logo">
-								Logo
+								<img src="assets/images/Logo.png" />
 							</div>
 
 							<div class="login-control">
@@ -61,10 +66,10 @@
 							<div id="panel-room">
 								<div class="room-header">
 									<button class="button styled-button green" id="back-to-menu">
-										<i class="fa fa-arrow-left"></i>
+										<i class="fa fa-chevron-left"></i>
 									</button>
 
-									<h4>Room #01</h4>
+									<h4>Hangar 1</h4>
 								</div>
 								<div id="plane-selector">
 									<h5>Select your Jet</h5>
@@ -79,19 +84,19 @@
 													<button class="button-plane">
 														Plane 1
 													</button>
-													<div class="player-avatar"></div>
+													<div class="player-avatar color-0"></div>
 												</li>
 												<li>
 													<button class="button-plane">
 														Plane 2
 													</button>
-													<div class="player-avatar"></div>
+													<div class="player-avatar color-0"></div>
 												</li>
 												<li>
 													<button class="button-plane">
 														Plane 3
 													</button>
-													<div class="player-avatar"></div>
+													<div class="player-avatar color-0"></div>
 												</li>
 											</ul>
 										</div>
@@ -109,26 +114,26 @@
 													<button class="button-plane">
 														Plane 1
 													</button>
-													<div class="player-avatar"></div>
+													<div class="player-avatar color-1"></div>
 												</li>
 												<li>
 													<button class="button-plane">
 														Plane 2
 													</button>
-													<div class="player-avatar"></div>
+													<div class="player-avatar color-1"></div>
 												</li>
 												<li>
 													<button class="button-plane">
 														Plane 3
 													</button>
-													<div class="player-avatar"></div>
+													<div class="player-avatar color-1"></div>
 												</li>
 											</ul>
 										</div>
 									</div>
 								</div>
 								<div class="room-control">
-									<div class="room-status">Waiting for other player ...</div>
+									<div class="room-status" style="display: none;">Waiting for other player ...</div>
 									<button class="button styled-button green" id="ready-game">
 										Ready
 									</button>
@@ -142,8 +147,10 @@
 		</div>
 
 		<div id="splash-screen">
-			<div class="logo">
-				Logo
+			<div class="container-logo">
+				<div class="logo">
+					<img src="assets/images/Logo.png" />
+				</div>
 			</div>
 		</div>
 

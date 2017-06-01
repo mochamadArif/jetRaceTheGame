@@ -37,7 +37,7 @@ $(document).ready(function(){
 				htmlEntity += '		<div class="room-player">';
 
 				for(var x=0;x<v.maxPlayers;x++) {
-					htmlEntity += '			<div class="player-avatar">';
+					htmlEntity += '			<div class="player-avatar color-'+x+'">';
 					htmlEntity += '			</div>';
 				}
 
@@ -74,74 +74,34 @@ $(document).ready(function(){
 		var datum_room = getRoomById(id);
 		var players = datum_room.signedPlayer ? datum_room.signedPlayer : [];
 
-		_.forEach(players, function(value){
-			if(players.length > 0) {
-				if(value.id == uid) {
+		/* TODO : CHECK IF PLAYER REFRESH THE PAGE BUH HAS ALREADY SIGNED TO THE ROOM */
 
-				}
-			}
+		players.push({
+			id: uid,
+			selectedPlane: 0,
+			isReady: false
 		});
 
-		if(players.length <= 0) {
-			players.push({
-				id: uid,
-				selectedPlane: 0,
-				isReady: false
-			});
+		var content = null;
 
-			var content = null;
-
-			if(players.length >= 2) {
-				content = {
-					signedPlayer: players,
-					isFull: true
-				}
-			}else {
-				content = { signedPlayer: players }
+		if(players.length >= 2) {
+			content = {
+				signedPlayer: players,
+				isFull: true
 			}
-
-			if(!content.isFull) {
-				firebase.database().ref('game_room/' + id).update(content).then(function(){
-					// $('#button-join-'+id).attr('disabled', true);
-
-					$('#signed-view').attr('data-inroom', true);
-					$('#panel-room').fadeIn();
-
-					hideLoadingPage();
-				}).catch(function(error) {
-					console("Data could not be saved." + error);
-					hideLoadingPage();
-				});
-			}
+		}else {
+			content = { signedPlayer: players }
 		}
 
-		/*if(_.indexOf(datum_room.signedPlayer, uid) == -1) {
-			players.push({
-				id: uid,
-				selectedPlane: 0,
-				isReady: false
-			});
+		firebase.database().ref('game_room/' + id).update(content).then(function(){
+			$('#signed-view').attr('data-inroom', true);
+			$('#panel-room').fadeIn();
 
-			
-
-			if(players.length >= 2) {
-				content = {
-					signedPlayer: players,
-					isFull: true
-				}
-			}else {
-				content = { signedPlayer: players }
-			}
-
-			firebase.database().ref('game_room/' + id).update(content).then(function(){
-				$('#signed-view').attr('data-inroom', true);
-				$('#panel-room').fadeIn();
-				hideLoadingPage();
-			}).catch(function(error) {
-				console("Data could not be saved." + error);
-				hideLoadingPage();
-			});
-		}*/
+			hideLoadingPage();
+		}).catch(function(error) {
+			console("Data could not be saved." + error);
+			hideLoadingPage();
+		});
 
 		$('#back-to-menu').on('click', function() {
 			cancelRace(id, uid);
