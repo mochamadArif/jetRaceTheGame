@@ -106,9 +106,3 @@ function setUnsign() {
 }
 
 /* --------------------------------------------------------------------------------- */
-function cancelRace(id) {
-	$('#panel-user').fadeIn();
-	$('.logo-main').fadeIn();
-	$('#panel-list-room').fadeIn();
-	$('#panel-room').hide();
-}

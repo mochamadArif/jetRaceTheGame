@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	getAllRoom()
+	getAllRoom();
 
 	function getAllRoom(){
 		var url = firebase.database().ref('game_room/');
@@ -64,22 +64,113 @@ $(document).ready(function(){
 		$('#panel-user').hide();
 		$('.logo-main').hide();
 		$('#panel-list-room').hide();
-		$('#panel-room').fadeIn();
-		
-		var datum_room = getRoomById(id);
-		var players = datum_room.signedPlayer ? (datum_room.signedPlayer.length ? datum_room.signedPlayer : []) : [];
 
-		if(_.indexOf(datum_room.signedPlayer, uid) == -1) {
-			players.push(uid);
-			firebase.database().ref('game_room/' + id).update({ signedPlayer: players });
+		showLoadingPage();
+
+		var datum_room = getRoomById(id);
+		var players = datum_room.signedPlayer ? datum_room.signedPlayer : [];
+
+		_.forEach(players, function(value){
+			if(players.length > 0) {
+				if(value.id == uid) {
+
+				}
+			}
+		});
+
+		if(players.length <= 0) {
+			players.push({
+				id: uid,
+				selectedPlane: 0,
+				isReady: false
+			});
+
+			var content = null;
+
+			if(players.length >= 2) {
+				content = {
+					signedPlayer: players,
+					isFull: true
+				}
+			}else {
+				content = { signedPlayer: players }
+			}
+
+			if(!content.isFull) {
+				firebase.database().ref('game_room/' + id).update(content).then(function(){
+					$('#signed-view').attr('data-inroom', true);
+					$('#panel-room').fadeIn();
+					hideLoadingPage();
+				}).catch(function(error) {
+					console("Data could not be saved." + error);
+					hideLoadingPage();
+				});
+			}
 		}
 
+		/*if(_.indexOf(datum_room.signedPlayer, uid) == -1) {
+			players.push({
+				id: uid,
+				selectedPlane: 0,
+				isReady: false
+			});
+
+			
+
+			if(players.length >= 2) {
+				content = {
+					signedPlayer: players,
+					isFull: true
+				}
+			}else {
+				content = { signedPlayer: players }
+			}
+
+			firebase.database().ref('game_room/' + id).update(content).then(function(){
+				$('#signed-view').attr('data-inroom', true);
+				$('#panel-room').fadeIn();
+				hideLoadingPage();
+			}).catch(function(error) {
+				console("Data could not be saved." + error);
+				hideLoadingPage();
+			});
+		}*/
+
 		$('#back-to-menu').on('click', function() {
-			cancelRace(id);
+			cancelRace(id, uid);
 		});
 
 		$('#ready-game').on('click', function() {
 			// TODO : SET READY
 		});
+	}
+
+	function cancelRace(id, uid) {
+		showLoadingPage();
+
+		var datum_room = getRoomById(id);
+
+		if(datum_room.signedPlayer) {
+			var idx = _.indexOf(datum_room.signedPlayer, uid);
+			
+			datum_room.signedPlayer.splice(idx, 1);
+
+			content = {
+				signedPlayer: datum_room.signedPlayer,
+				isFull: false
+			}
+
+			firebase.database().ref('game_room/' + id).update(content).then(function(){
+				$('#panel-user').fadeIn();
+				$('.logo-main').fadeIn();
+				$('#panel-list-room').fadeIn();
+				$('#signed-view').attr('data-inroom', false);
+				$('#panel-room').hide();
+				hideLoadingPage();
+			}).catch(function(error) {
+				console("Data could not be saved." + error);
+				hideLoadingPage();
+			});
+		}
 	}
 });
