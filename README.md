@@ -5,7 +5,7 @@ Sebuah game edukasi yang belum selesai entah kapan akan menyelesaikannya. Tujuan
 
 ##### Kredit
 - Adam Azkiya (UX & UI Designer) adamazkiya@rollingglory.com
-- Karina Utami Putri (Graphic Designer, Composer) karina@rollingglory.com
+- Karina Utami Putri (Graphic Designer, Composer) inyaa@rollingglory.com
 - Mochamad Arif Septian Putera (Codder) arif.fufu@rollingglory.com
 
 https://mochamadarif.github.io/jetRaceTheGame/
