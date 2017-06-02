@@ -1,6 +1,38 @@
 $(document).ready(function(){
 	getAllRoom();
 
+	$('.button-answer').each(function(){
+		$(this).on('click', function(){
+			var uid = $('#signed-view').data('id');
+			// var idRoom = $('#signed-view').data('roomID');
+			var nextQuestion = $(this).parent().parent().data('id') + 1;
+
+			var url = firebase.database().ref('game_room/');
+				url.on('value', function(snapshot) {
+					var result = snapshot.val();
+
+					_.forEach(result, function(value, key) {
+						if(value.signedPlayer) {
+							var idRoom = key;
+							_.forEach(value.signedPlayer, function(value, key) {
+								if(key == uid) {
+									firebase.database().ref('game_room/'+ idRoom +'/signedPlayer/'+ key ).update({ questionNum: nextQuestion })
+								}
+							});
+						}
+					});
+				});
+
+				setQuestion(idRoom, uid);
+
+			if($(this).data('answer')) {
+				
+			}else {
+				// alert('SALAH! - '+idQuestion);
+			}
+		});
+	});
+
 	function getAllRoom(){
 		var url = firebase.database().ref('game_room/');
 
@@ -76,6 +108,9 @@ $(document).ready(function(){
 			isReady: false
 		}).then(function(){
 			$('#signed-view').attr('data-inroom', true);
+			$('.planet').animate({
+				bottom: -80
+			}, 1000);
 			$('#panel-room').fadeIn(function(){
 				/* SET ROOM DATA */
 				setRace(id, uid);
@@ -115,6 +150,11 @@ $(document).ready(function(){
 							$('#panel-list-room').fadeIn();
 							$('#signed-view').attr('data-inroom', false);
 							$('#panel-room').hide();
+
+							$('.planet').animate({
+								bottom: 0
+							}, 1000);
+
 							hideLoadingPage();
 						}).catch(function(error) {
 							console("Data could not be saved." + error);
@@ -226,10 +266,13 @@ $(document).ready(function(){
 		});
 
 		if(playersReady == roomData.maxPlayers) {
+
 			firebase.database().ref('game_room/'+ idRoom ).update({ isPlaying: true }).then(function(){
 				
 				$('#panel-room').hide();
-				$('#panel-game').fadeIn();
+				$('#panel-game').show();
+
+				generateQuestion(idRoom);
 
 			}).catch(function(error) {
 				console("Data could not be saved." + error);
@@ -264,5 +307,77 @@ $(document).ready(function(){
 
 			i++;
 		});
+	}
+
+/* ----------------------------------------------------------------------------------------------------- */
+	/*function updateGame(dataRoom, idRoom) {
+		getQuestionById(id)
+	}
+
+	function checkOtherPlayerProgress(idRoom) {
+		var url = firebase.database().ref('game_room/'+idRoom);
+			result = null;
+
+		url.on('value', function(snapshot) {
+			result = snapshot.val();
+
+			if(result.signedPlayer) {
+				_.forEach(result.signedPlayer)
+
+				url = firebase.database().ref('game_room/'+idRoom);
+			}
+
+			updateGame(result, idRoom);
+		}, function(error) {
+			console.log(error)
+		});
+	}*/
+
+	function generateQuestion(idRoom) {
+		var url = firebase.database().ref('game_room/'+ idRoom);
+
+		url.on('value', function(snapshot) {
+			var result = snapshot.val();
+
+			if(result.isPlaying && result.signedPlayer) {
+				_.forEach(result.signedPlayer, function(value, key){
+					firebase.database().ref('game_room/'+ idRoom +'/signedPlayer/'+ key ).update({ questionNum: 0 }).then(function(){
+						setQuestion(idRoom, key);
+					})
+				});
+			}
+		});
+	}
+
+	function setQuestion(idRoom, uid) {
+		var url = firebase.database().ref('game_room/'+ idRoom +'/signedPlayer/'+ uid);
+
+		url.on('value', function(snapshot) {
+			var result = snapshot.val();
+
+			var datum = getQuestionById(result.questionNum);
+
+			if(datum) {
+				$('.question-panel').attr('data-id', result.questionNum + 1);
+				$('.question-panel').attr('data-roomID', idRoom);
+				$('.question-panel').find('.question').text(datum.question);
+
+				_.forEach(datum.choices, function(value, key) {
+					$('.choice').find('#answer-'+key).text(value.name);
+					$('.choice').find('#answer-'+key).attr('data-answer', key == datum.answer ? true : false);
+				});
+			}
+		});
+	}
+
+	function getQuestionById(id) {
+		var url = firebase.database().ref('questions/'+id);
+		var result = null;
+
+		url.on('value', function(snapshot) {
+			result = snapshot.val();
+		});
+
+		return result;
 	}
 });
