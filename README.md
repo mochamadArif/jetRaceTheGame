@@ -1,5 +1,7 @@
-# jetRaceTheGame
+# Jet Race the Game
 Jamming Glory purpose
+
+![alt text](https://github.com/mochamadArif/jetRaceTheGame/blob/master/splash/splash.jpg "Screen")
 
 Sebuah game edukasi yang belum selesai entah kapan akan menyelesaikannya. Tujuannya cuma untuk nge-jam, tapi kok hasilnya ok.
 
