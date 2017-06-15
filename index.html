@@ -8,217 +8,138 @@
 		<title>Jet Race The Game</title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+		<link rel="shortcut icon" type="image/png" href="assets/images/jrtg.png"/>
 		<link rel="stylesheet" type="text/css" href="assets/css/main.css">
-		<link rel="manifest" href="manifest.json">
 	</head>
 	<body>
-		<div class="bg">
-			<img src="assets/images/bg-layer-1.png" class="bg-layer-1" />
-			<img src="assets/images/bg-layer-0.png" class="bg-layer-0" />
-			<img src="assets/images/planet.png" class="planet" />
-		</div>
-		<div class="site-wrap">
-			<div class="main-content container-fluid">
-				<div class="row clearfix">
-					<div class="col-sm-12">
+		<div class="site">
+			<div id="game"></div>
 
-						<div id="panel-login">
-							<div class="logo">
-								<img src="assets/images/Logo.png" />
-							</div>
+			<div id="signin" class="container">
+				<img src="assets/images/logo.png" class="logo" />
+				<button id="button-signin" class="button bordered">
+					<i class="fa fa-google"></i>&nbsp;&nbsp;SIGN IN WITH GOOGLE
+				</button>
+				<div class="info">
+					<p>Version 1.2.0</p>
+					<p>Please read our <a href="#" title="Terms of Use">Terms of Use</a> and <a href="#" title="Privacy Policy">Privacy Policy</a> before play this game.</p>
+					<p>Use <a href="https://www.google.com/chrome/" title="Chrome Browser"><i class="fa fa-chrome"></i>&nbsp;Chrome Browser</a> for better experience.</p>
+				</div>
+			</div>
 
-							<div class="login-control">
-								<button class="button styled-button green" id="quickstart-sign-in">
-									<i class="fa fa-google"></i>&nbsp;&nbsp;SIGN IN WITH GOOGLE
-								</button>
-							</div>
+			<div id="home" class="container">
+				<div class="header">
+					<button id="button-settings" class="button icon" title="Settings">
+						<i class="fa fa-gear"></i>
+					</button>
+					<button id="button-signout" class="button icon" title="Sign Out">
+						<i class="fa fa-power-off"></i>
+					</button>
+					<div class="user-data">
+						<div class="name">
+							Hi, <span id="user-name">Mochamad Arif Septian Putera</span>
 						</div>
-
-						<div id="signed-view" data-id="" data-inroom=false>
-							<div id="panel-user">
-								<div class="clearfix">
-									<button class="button styled-button green pull-right" id="quickstart-sign-out">
-										<i class="fa fa-power-off"></i>
-									</button>
-									<div class="player-data">
-										<div class="player-identity">
-											<h4 class="player-name">Hi, <span id="player-name"></span></h4>
-											<div class="player-points">
-												<span><i class="fa fa-play"></i>&nbsp;&nbsp;0</span>&nbsp;&nbsp;&nbsp;&nbsp;<span><i class="fa fa-trophy"></i>&nbsp;&nbsp;0</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class="logo-main">
-								<img src="assets/images/Logo.png" />
-							</div>
-
-							<div id="panel-list-room">
-								<h4>Please select your hangar!</h4>
-								<div class="room-list-container">
-									<div class="scroll">
-										<ul id="room-list"></ul>
-									</div>
-								</div>
-							</div>
-
-							<div id="panel-room">
-								<div class="room-header">
-									<button class="button styled-button green" id="back-to-menu">
-										<i class="fa fa-chevron-left"></i>
-									</button>
-
-									<h4 id="room-name"></h4>
-								</div>
-								<div id="plane-selector">
-									<h5>Select your Jet</h5>
-
-									<div id="selector-noplayer-1" class="selection-block no-player">
-										Waiting for an opponent
-									</div>
-									<div id="selector-readyplayer-1" class="selection-block ready-player">
-										READY
-									</div>
-									<div id="selector-1" class="selection-block">
-										<span id="player-name-1" class="player-name">
-											John
-										</span>
-										<div class="scroll">
-											<ul>
-												<li>
-													<button class="button-plane player-1 selected" data-id="0">
-														<img src="assets/images/pesawat-1-biru.png" />
-													</button>
-													<div class="player-avatar color-0">
-														<img src="assets/images/profile-1.png" />
-													</div>
-												</li>
-												<li>
-													<button class="button-plane player-1 exp" data-id="1">
-														<img src="assets/images/pesawat-2-biru.png" />
-													</button>
-													<div class="player-avatar color-0">
-														<img src="assets/images/profile-1.png" />
-													</div>
-												</li>
-												<li>
-													<button class="button-plane player-1" data-id="2">
-														<img src="assets/images/pesawat-3-biru.png" />
-													</button>
-													<div class="player-avatar color-0">
-														<img src="assets/images/profile-1.png" />
-													</div>
-												</li>
-											</ul>
-										</div>
-									</div>
-									<div class="selection-block-separator">
-										<h4>VS</h4>
-									</div>
-									<div id="selector-noplayer-2" class="selection-block no-player">
-										Waiting for an opponent
-									</div>
-									<div id="selector-readyplayer-2" class="selection-block ready-player">
-										READY
-									</div>
-									<div id="selector-2" class="selection-block">
-										<span id="player-name-2" class="player-name">
-											John
-										</span>
-										<div class="scroll">
-											<ul>
-												<li>
-													<button class="button-plane player-2 selected" data-id="0">
-														<img src="assets/images/pesawat-1-merah.png" />
-													</button>
-													<div class="player-avatar color-1">
-														<img src="assets/images/profile-2.png" />
-													</div>
-												</li>
-												<li>
-													<button class="button-plane player-2 exp" data-id="1">
-														<img src="assets/images/pesawat-2-merah.png" />
-													</button>
-													<div class="player-avatar color-1">
-														<img src="assets/images/profile-2.png" />
-													</div>
-												</li>
-												<li>
-													<button class="button-plane player-2" data-id="2">
-														<img src="assets/images/pesawat-3-merah.png" />
-													</button>
-													<div class="player-avatar color-1">
-														<img src="assets/images/profile-2.png" />
-													</div>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-								<div class="room-control">
-									<div class="room-status" style="display: none;">
-									<i class="fa fa-spinner fa-spin"></i><br/>Please wait, your opponent is not ready.</div>
-									<button class="button styled-button green" id="ready-game">
-										Ready
-									</button>
-								</div>
-							</div>
-
-							<audio autoplay="true" loop="true">
-								<source src="assets/musics/bgm-game.mp3" type="audio/mpeg">
-								Your browser does not support the audio element.
-							</audio>
+						<div class="stat">
+							<span><i class="fa fa-play"></i>&nbsp;&nbsp;0</span>&nbsp;&nbsp;&nbsp;&nbsp;<span><i class="fa fa-trophy"></i>&nbsp;&nbsp;0</span>
 						</div>
-
 					</div>
 				</div>
-			</div>
-		</div>
 
-		<div id="panel-game">
-			<div class="game">
-				<div class="bar-panel">
-					<div class="ruler"></div>
-				</div>
-
-				<div class="pesawat pesawat-1">
-					<img src="assets/images/pesawat-player-1.png" />
-				</div>
-				<div class="pesawat pesawat-2">
-					<img src="assets/images/pesawat-player-2.png" />
-				</div>
-
-				<div class="question-panel" data-id="0">
-					<div class="question"></div>
-					<div class="choice">
-						<button id="answer-0" class="button-answer" data-answer=true></button>
-						<button id="answer-1" class="button-answer" data-answer=false></button>
+				<div class="menu-screen">
+					<div class="menu">
+						<div class="menu-item">
+							<div class="menu-item-detail">
+								<span class="menu-title">Start Mission</span>
+								<div class="menu-content">
+									Start a new mission, begin with Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.
+								</div>
+								<div class="control">
+									<button id="button-menu-play" class="button bordered button-menu" title="Start">
+										Start
+									</button>
+								</div>
+							</div>
+						</div>
+						<div class="menu-item">
+							<div class="menu-item-detail">
+								<span class="menu-title">Statistics</span>
+								<div class="menu-content">
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.
+								</div>
+								<div class="control">
+									<button id="button-menu-check" class="button bordered button-menu" title="Check">
+										Check
+									</button>
+								</div>
+							</div>
+						</div>
+						<div class="menu-item">
+							<div class="menu-item-detail">
+								<span class="menu-title">My Hangar</span>
+								<div class="menu-content">
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.
+								</div>
+								<div class="control">
+									<button id="button-menu-customize" class="button bordered button-menu" title="Customize">
+										Customize
+									</button>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
+
+				<div class="footer">
+					<p>Version 1.2.0&nbsp;&nbsp;|&nbsp;&nbsp;Use <a href="https://www.google.com/chrome/" title="Chrome Browser"><i class="fa fa-chrome"></i>&nbsp;Chrome Browser</a> for better experience.</p>
+				</div>
 			</div>
 		</div>
 
-		<div id="splash-screen">
-			<div class="bg">
-				<img src="assets/images/bg-layer-0.png" class="bg-layer-0" />
-				<img src="assets/images/bg-layer-1.png" class="bg-layer-1" />
-				<img src="assets/images/planet.png" class="planet" />
-			</div>
-			<div class="container-logo">
-				<div class="logo">
-					<img src="assets/images/Logo.png" />
+		<div id="popup-mission" class="popup">
+			<div class="popup-container">
+				<div class="popup-header">
+					Start Mission
 				</div>
+				<div class="popup-content">
+					<div class="mission-list">
+						<span class="loading-mission"><i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;Collecting Mission Data ...</span>
+					</div>
+				</div>
+				<button class="button icon button-close-poopup" title="Close">
+					<i class="fa fa-close"></i>
+				</button>
+			</div>
+		</div>
+
+		<div id="popup-statistic" class="popup">
+			<div class="popup-container">
+				<div class="popup-header">
+					Statistics
+				</div>
+				<div class="popup-content">
+					<span class="loading-mission"><i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;Collecting Statistic Data ...</span>
+				</div>
+				<button class="button icon button-close-poopup" title="Close">
+					<i class="fa fa-close"></i>
+				</button>
 			</div>
 		</div>
 
 		<div class="loading">
 			<div class="loading-page">
-				<i class="fa fa-spinner fa-spin"></i>&nbsp;Loading...
+				<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;Loading...
 			</div>
 		</div>
+
+		<audio id="music-game" loop="true">
+			<source src="assets/musics/bgm-game.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
+
+		<audio id="music-home" loop="true">
+			<source src="assets/musics/bgm-home.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
 
 		<script src="https://www.gstatic.com/firebasejs/4.1.0/firebase.js"></script>
 		<script>
@@ -237,10 +158,12 @@
 
 		<script type="text/javascript" src="assets/js/vendor/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
-		<script type="text/javascript" src="assets/js/vendor/bootstrap.min.js"></script>
 		<script type="text/javascript" src="assets/js/utility.js"></script>
-		<script type="text/javascript" src="assets/js/gameHandler.js"></script>
-		<script type="text/javascript" src="assets/js/roomHandler.js"></script>
-		<script type="text/javascript" src="assets/js/main.js"></script>
+		<script type="text/javascript" src="assets/js/vendor/phaser.min.js"></script>
+		<script type="text/javascript" src="assets/js/vendor/require.js"></script>
+		<script type="text/javascript" src="assets/js/runtime.js"></script>
+		<script type="text/javascript" src="assets/js/auth.js"></script>
+		<script type="text/javascript" src="assets/js/call.js"></script>
+		<script type="text/javascript" src="assets/js/app.js"></script>
 	</body>
 </html>
