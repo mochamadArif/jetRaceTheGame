@@ -108,10 +108,120 @@ body {
 		}
 	}
 
-	.menu-screen {
+	.screen {
 		display: none;
 		flex: 1;
 		position: relative;
+
+		.screen-title {
+			position: relative;
+			font-family: @FONT_LEMON;
+			letter-spacing: 1px;
+			font-size: 24px;
+			color: #fff;
+			text-shadow: 0 0 5px #fff;
+			padding-right: 35px;
+			margin-bottom: 10px;
+
+			.button-close-screen {
+				position: absolute;
+				top: -8px;
+				right: 0;
+			}
+		}
+
+		.screen-content {
+			display: flex;
+			flex: 1;
+			overflow-y: auto;
+			flex-direction: column;
+			padding: 10px 10px 10px 0;
+
+			ul {
+				margin: 0;
+				padding: 0;
+
+				li {
+					list-style: none;
+					margin-bottom: 10px;
+
+					&:last-child {
+						margin-bottom: 0;
+					}
+				}
+			}
+
+			&::-webkit-scrollbar {
+				width: 5px;
+			}
+
+			&::-webkit-scrollbar-track {
+				background-color: fade(#000, 10%);
+			}
+
+			&::-webkit-scrollbar-thumb {
+				background-color: fade(#20C7D9, 30%);
+				outline: none;
+				border: 0;
+				.transition();
+
+				&:hover {
+					background-color: fade(#20C7D9, 50%);
+				}
+			}
+		}
+	}
+
+	.mission-screen {
+		padding: 20px 30px;
+
+		.mission {
+			display: flex;
+			flex-direction: column;
+			width: 450px;
+			padding: 10px 0;
+
+			.mission-list-item {
+				color: #fff;
+				padding: 10px;
+				background-color: fade(darken(#271e54, 5%), 80%);
+				// border: solid 1px #fff;
+				.rounded(8px);
+
+				.mission-title {
+					font-family: @FONT_LEMON;
+					letter-spacing: 1px;
+					font-size: 16px;
+					color: #FF207B;
+				}
+
+				.mission-detail {
+					font-family: Arial, Helvetica;
+					font-size: 14px;
+					padding: 10px 0 5px;
+				}
+
+				.mission-description {
+					font-family: Arial, Helvetica;
+					font-size: 12px;
+
+					p { margin: 0; padding: 5px 0 15px; }
+				}
+
+				.mission-control {
+					text-align: right;
+
+					.button-join-mission {
+						font-family: @FONT_LEMON;
+						letter-spacing: 1px;
+						font-size: 12px;
+					}
+				}
+			}
+		}
+	}
+
+	.menu-screen {
 		padding: 20px 30px;
 		// background-color: fade(red, 50%);
 
@@ -257,7 +367,7 @@ body {
 		flex: 1;
 		flex-direction: column;
 		background-color: fade(#20C7D9, 70%);
-		max-width: 1000px;
+		max-width: 800px;
 		z-index: 9999;
 		border: solid 1px #20C7D9;
 		.box-shadow(0 0 20px #20C7D9);
@@ -283,7 +393,7 @@ body {
 			display: flex;
 			flex: 1;
 			justify-content: center;
-			align-items: center;
+			// align-items: center;
 
 			font-family: Arial, Helvetica;
 			color: #fff;
@@ -303,18 +413,68 @@ body {
 .loading-mission {
 	font-size: 12px;
 
-	i {
-		font-size: 14px;
-	}
+	i { font-size: 14px; }
 }
 
-.mission-list {
+/*.mission-list {
 	display: flex;
 	flex: 1;
-	justify-content: center;
-	align-items: center;
-	// background-color: fade(#1f6c74, 50%);
-}
+	margin-right: 250px;
+	height: 300px;
+	padding: 10px;
+	overflow-y: auto;
+
+	&::-webkit-scrollbar {
+		width: 5px;
+	}
+
+	&::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: fade(#20C7D9, 80%);
+		outline: 1px solid slategrey;
+		.transition();
+
+		&:hover {
+			background-color: #20C7D9;
+			text-shadow: 0 0 10px fade(#20C7D9, 80%);
+		}
+	}
+
+	.mission-list-item {
+		position: relative;
+		min-height: 100px;
+		border: solid 1px #20C7D9;
+		background-color: rgba(0,0,0,.3);
+		padding: 10px;
+		.rounded(4px);
+
+		.mission-title {
+			font-family: @FONT_LEMON;
+			letter-spacing: 1px;
+			font-size: 16px;
+		}
+
+		.mission-control {
+			text-align: right;
+		}
+	}
+
+	ul {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+
+		li {
+			list-style: none;
+			margin-bottom: 20px;
+
+			&:last-child { margin-bottom: 10px; }
+		}
+	}
+}*/
 
 .loading {
 	position: absolute;

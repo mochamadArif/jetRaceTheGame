@@ -7,6 +7,11 @@ $(function(){
 			closePopup();
 		});
 	});
+
+	$('#button-close-mission-screen').on('click', function(){
+		hideMission();
+		showMenu();
+	});
 });
 
 /* Loading inside button */
@@ -129,24 +134,4 @@ function closePopup(onComplete) {
 	$('.popup').fadeOut('fast', function(){
 		onComplete ? onComplete() : null;
 	});
-}
-
-function showMenu() {
-	/* Show menu screen */
-	const _menuScreen = $('.menu-screen');
-
-	setTimeout(function() {
-		_menuScreen.css('display', 'flex').hide().fadeIn(function(){
-			var t=1;
-			$('.menu-item').each(function(){
-				var $this = $(this);
-
-				setTimeout(function() {
-					$this.find('.menu-item-detail').fadeIn();
-				}, 250 * t);
-
-				t++;
-			});
-		});
-	}, 500);
 }
